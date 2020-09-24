@@ -1,0 +1,144 @@
+<!DOCTYPE HTML>
+<html>
+	<head> 
+		<meta name="viewport" content="width=device-width,initial-scale=1.0">
+		<title>Fiction Books Sales</title>
+	</head>
+<body>
+	<div id="chartContainer" style="height: 300px; max-width: 920px; margin: 0px auto;"></div>
+	<script>
+	window.onload = function () {
+
+		var chart = new CanvasJS.Chart("chartContainer", {
+			animationEnabled: true,
+			title:{
+				text: "Fiction Books Sales",
+				horizontalAlign: 'left',
+				fontSize: 20,
+				fontWeight: 'light'
+			},
+			axisX: {
+				reversed: true,
+			},
+			axisY: {
+				suffix: 'K',
+				minimum: 0,
+				maximum: 140,
+				margin: 20
+			},
+			toolTip: {
+				shared: true
+			},
+			legend:{
+				cursor: "pointer",
+				itemclick: toggleDataSeries,
+				verticalAlign: "top"
+			},
+			data: [{
+				type: "stackedBar",
+				name: "Marine Sprite",
+				showInLegend: "true",
+				color: '#008FFB',
+				indexLabelPlacement: "inside",
+				indexLabel: "{y}",
+				indexLabelFontColor: '#FFFFFF',
+				dataPoints: [
+					{ label: 2008, y: 44, color: '#008FFB' },
+					{ label: 2009, y: 55, color: '#008FFB' },
+					{ label: 2010, y: 41, color: '#008FFB' },
+					{ label: 2011, y: 37, color: '#008FFB' },
+					{ label: 2012, y: 22, color: '#008FFB' },
+					{ label: 2013, y: 43, color: '#008FFB' },
+					{ label: 2014, y: 21, color: '#008FFB' },
+				]
+			},
+			{
+				type: "stackedBar",
+				name: "Tank Picture",
+				showInLegend: "true",
+				color: '#00E396',
+				indexLabelPlacement: "inside",
+				indexLabel: "{y}",
+				indexLabelFontColor: '#FFFFFF',
+				dataPoints: [
+					{ label: 2008, y: 53, color: '#00E396' },
+					{ label: 2009, y: 32, color: '#00E396' },
+					{ label: 2010, y: 33, color: '#00E396' },
+					{ label: 2011, y: 52, color: '#00E396' },
+					{ label: 2012, y: 13, color: '#00E396' },
+					{ label: 2013, y: 43, color: '#00E396' },
+					{ label: 2014, y: 32, color: '#00E396' },
+				]
+			},
+			{
+				type: "stackedBar",
+				name: "Striking Car",
+				showInLegend: "true",
+				color: '#FEB019',
+				indexLabelPlacement: "inside",
+				indexLabel: "{y}",
+				indexLabelFontColor: '#FFFFFF',
+				dataPoints: [
+					{ label: 2008, y: 12, color: '#FEB019' },
+					{ label: 2009, y: 17, color: '#FEB019' },
+					{ label: 2010, y: 11, color: '#FEB019' },
+					{ label: 2011, y: 9, color: '#FEB019' },
+					{ label: 2012, y: 16, color: '#FEB019' },
+					{ label: 2013, y: 11, color: '#FEB019' },
+					{ label: 2014, y: 20, color: '#FEB019' },
+				]
+			},
+			{
+				type: "stackedBar",
+				name: "Bucket Slope",
+				showInLegend: "true",
+				color: '#FF4560',
+				indexLabelPlacement: "inside",
+				indexLabel: "{y}",
+				indexLabelFontColor: '#FFFFFF',
+				dataPoints: [
+					{ label: 2008, y: 9, color: '#FF4560' },
+					{ label: 2009, y: 7, color: '#FF4560' },
+					{ label: 2010, y: 5, color: '#FF4560' },
+					{ label: 2011, y: 8, color: '#FF4560' },
+					{ label: 2012, y: 6, color: '#FF4560' },
+					{ label: 2013, y: 9, color: '#FF4560' },
+					{ label: 2014, y: 4, color: '#FF4560' },
+				]
+			},
+			{
+				type: "stackedBar",
+				name: "Rebom Kid",
+				showInLegend: "true",
+				color: '#775DD0',
+				indexLabelPlacement: "inside",
+				indexLabel: "{y}",
+				indexLabelFontColor: '#FFFFFF',
+				dataPoints: [
+					{ label: 2008, y: 25, color: '#775DD0' },
+					{ label: 2009, y: 12, color: '#775DD0' },
+					{ label: 2010, y: 19, color: '#775DD0' },
+					{ label: 2011, y: 32, color: '#775DD0' },
+					{ label: 2012, y: 25, color: '#775DD0' },
+					{ label: 2013, y: 24, color: '#775DD0' },
+					{ label: 2014, y: 10, color: '#775DD0' },
+				]
+			}]
+		});
+		chart.render();
+
+		function toggleDataSeries(e) {
+			if(typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
+				e.dataSeries.visible = false;
+			}
+			else {
+				e.dataSeries.visible = true;
+			}
+			chart.render();
+		}
+
+	}
+	</script>
+	<script src="./js/canvasjs.min.js"></script>
+</body>
+</html>
