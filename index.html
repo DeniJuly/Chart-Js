@@ -17,10 +17,12 @@
 </head>
 <body>
 	<div class="card">
-		<div class="card-header">
-			Featured
+		<div class="card-header d-flex align-items-center justify-content-between">
+			<p>Featured</p>
+			<select class="form-control" id="select" onchange="changeLabel()">
+			</select>
 		</div>
-		<div id="container" style="width: 75%;">
+		<div id="container">
 			<canvas id="canvas"></canvas>
 		</div>
 		<div class="card-footer">
@@ -28,191 +30,10 @@
 			<button id="removeDataset">Remove Dataset</button>
 			<button id="addData">Add Data</button>
 			<button id="removeData">Remove Data</button>
+			<button id="resetChart">Reset Chart</button>
 		</div>
 	</div>
-	<script>
-		var colors = [
-			'#008FFB',
-			"#00E396",
-			"#FEB019",
-			"#FF4560",
-			"#775DD0"
-		]
-		var labelsIndex = 6;
-		var colorIndex = 0;
-		var labels = [
-			2008,
-			2009,
-			2010,
-			2011,
-			2012,
-			2013,
-			2014,
-		]
-		var iniData = [
-			{
-				data: [44, 55, 41, 37, 22, 43, 21],
-				backgroundColor: "#008FFB",
-				label: 'Marine Sprite'
-			},
-			{
-				data: [53, 32, 33, 52, 13, 43, 32],
-				backgroundColor: "#00E396",
-				label: 'Tank Picture'
-			},
-			{
-				data: [12, 17, 11, 59, 16, 11, 20],
-				backgroundColor: "#FEB019",
-				label: 'Striking Car'
-			},
-			{
-				data: [11, 24, 16, 76, 62, 91, 24],
-				backgroundColor: "#FF4560",
-				label: "Bucket Slope",
-			},
-			{
-				data: [25, 12, 19, 32, 25, 24, 10],
-				backgroundColor: "#775DD0",
-				label: "Rebom Kid"
-			}
-		];
-		var barOptions_stacked = {
-			tooltips: {
-				enabled: true
-			},
-			hover: {
-				animationDuration: 0
-			},
-			scales: {
-				xAxes: [
-					{
-						ticks: {
-							beginAtZero: true,
-							fontFamily: "'Open Sans Bold', sans-serif",
-							fontSize: 11
-						},
-						scaleLabel: {
-							display: false
-						},
-						gridLines: {
-							drawOnChartArea: false,
-							color: "black",
-							zeroLineColor: "black"
-						},
-						stacked: true
-					}
-				],
-				yAxes: [
-					{
-						gridLines: {
-							display: false,
-							color: "black",
-							zeroLineColor: "#fff",
-							zeroLineWidth: 0
-						},
-						ticks: {
-							fontFamily: "'Open Sans Bold', sans-serif",
-							fontSize: 11
-						},
-						stacked: true
-					}
-				]
-			},
-			legend: {
-				display: true
-			},
-
-			animation: {
-				onComplete: function() {
-					var chartInstance = this.chart;
-					var ctx = chartInstance.ctx;
-					ctx.fillStyle = "#fff";
-
-					Chart.helpers.each(
-						this.data.datasets.forEach(function(dataset, i) {
-						var meta = chartInstance.controller.getDatasetMeta(i);
-						Chart.helpers.each(
-							meta.data.forEach(function(bar, index) {
-								data = dataset.data[index];
-								if (i == 0) {
-									ctx.fillText(data, 50, bar._model.y + 4);
-								} else {
-									ctx.fillText(data, bar._model.x - 25, bar._model.y + 4);
-								}
-							}),
-							this
-						);
-						}),
-						this
-					);
-				}
-			},
-			pointLabelFontFamily: "Quadon Extra Bold",
-			scaleFontFamily: "Quadon Extra Bold"
-		};
-		var myData = {
-			type: "horizontalBar",
-			data: {
-				labels: labels,
-				datasets: iniData
-			},
-			options: barOptions_stacked
-		}
-		var ctx = document.getElementById("canvas");
-		window.myChart = new Chart(ctx, myData);
-		document.getElementById('addDataset').addEventListener('click', function() {
-			var colorName = colors[colorIndex];
-			
-			var newDataset = {
-				data: [
-					randomInt(), 
-					randomInt(), 
-					randomInt(), 
-					randomInt(), 
-					randomInt(), 
-					randomInt(), 
-					randomInt(),],
-				backgroundColor: colorName,
-				label: 'Data ke-' + (myData.data.datasets.length + 1)
-			};
-			myData.data.datasets.push(newDataset);
-			window.myChart.update();
-			if(colorIndex < 4){
-				colorIndex = colorIndex + 1;
-			} else {
-				colorIndex = 0;
-			}
-		});
-		document.getElementById('removeDataset').addEventListener('click', function() {
-			myData.data.datasets.pop();
-			window.myChart.update();
-		});
-		document.getElementById('addData').addEventListener('click', function() {
-			if (myData.data.datasets.length > 0) {
-				var label = labels[labelsIndex] + 1;
-				myData.data.labels.push(label)
-
-				for (var index = 0; index < myData.data.datasets.length; ++index) {
-					myData.data.datasets[index].data.push(randomInt())
-				}
-
-				window.myChart.update();
-			}
-		});
-		document.getElementById('removeData').addEventListener('click', function() {
-			myData.data.labels.splice(-1, 1); // remove the label first
-
-			myData.data.datasets.forEach(function(dataset) {
-				dataset.data.pop();
-			});
-
-			window.myChart.update();
-		});
-		window.randomInt = function(){
-			return Math.floor(Math.random() * 100); 
-		}
-
-	</script>
+	<script src="./js/script.js"></script>
 </body>
 
 </html>
