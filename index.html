@@ -1,39 +1,40 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
-	<head><!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta name="viewport" content="">
-	<title>Horizontal Bar Chart</title>
-	<script src="./chart js/Chart.min.js"></script>
-	<link rel="stylesheet" href="./css/style.css">
-	<style>
-	canvas {
-		-moz-user-select: none;
-		-webkit-user-select: none;
-		-ms-user-select: none;
-	}
-	</style>
-</head>
-<body>
-	<div class="card">
-		<div class="card-header d-flex align-items-center justify-content-between">
-			<p>Featured</p>
-			<select class="form-control" id="select" onchange="changeLabel()">
-			</select>
+	<head>
+		<!-- Required meta tags -->
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta name="viewport" content="" />
+		<title>Horizontal Bar Chart</title>
+		<script src="./js/jquery.js"></script>
+		<script src="./chart js/Chart.min.js"></script>
+		<link rel="stylesheet" href="./css/style.css" />
+		<style>
+			canvas {
+				-moz-user-select: none;
+				-webkit-user-select: none;
+				-ms-user-select: none;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="card">
+			<div class="card-header d-flex align-items-center justify-content-between">
+				<p>Featured</p>
+				<select class="form-control" id="select" onchange="changeLabel()"></select>
+			</div>
+			<div id="container">
+				<canvas id="canvas"></canvas>
+			</div>
+			<div class="card-footer">
+				<!-- <button id="addDataset">Add Dataset</button>
+				<button id="removeDataset">Remove Dataset</button> -->
+				<button id="addData">Add Data</button>
+				<button id="removeData">Remove Data</button>
+				<button id="resetChart">Reset Chart</button>
+			</div>
 		</div>
-		<div id="container">
-			<canvas id="canvas"></canvas>
-		</div>
-		<div class="card-footer">
-			<button id="addDataset">Add Dataset</button>
-			<button id="removeDataset">Remove Dataset</button>
-			<button id="addData">Add Data</button>
-			<button id="removeData">Remove Data</button>
-			<button id="resetChart">Reset Chart</button>
-		</div>
-	</div>
-	<script src="./js/script.js"></script>
-</body>
-
+		<script src="./js/dataChart.js"></script>
+		<script src="./js/script.js"></script>
+	</body>
 </html>
