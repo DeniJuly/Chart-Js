@@ -17,7 +17,7 @@ var barOptions_stacked = {
 				ticks: {
 					beginAtZero: true,
 					fontFamily: "'Open Sans Bold', sans-serif",
-					fontSize: 11,
+					fontSize: 13,
 				},
 				scaleLabel: {
 					display: false,
@@ -40,7 +40,7 @@ var barOptions_stacked = {
 				},
 				ticks: {
 					fontFamily: "'Open Sans Bold', sans-serif",
-					fontSize: 11,
+					fontSize: 13,
 				},
 				stacked: true,
 			},
@@ -83,7 +83,8 @@ Object.size = function (obj) {
 	}
 	return size;
 };
-var dataset = [];
+
+let dataset = [];
 
 var myData = {
 	type: "horizontalBar",
@@ -96,72 +97,53 @@ var myData = {
 
 window.setData = function (index) {
 	filterIndex = index;
-	let month = filterLabel[index];
-	dataset = dataChart[month].dataset;
-	myData.data.labels = dataChart[month].label;
-	myData.data.datasets = dataset;
+	dataset = JSON.parse(JSON.stringify(dataChart["januari"]));
+	for (let i = 1; i < parseInt(index) + 1; i++) {
+		let month = filterLabel[index];
+		let datamonth = JSON.parse(JSON.stringify(dataChart[month].dataset));
+		for (let x = 0; x < datamonth.length; x++) {
+			for (let y = 0; y < datamonth[x].data.length; y++) {
+				dataset["dataset"][x].data[y] = dataset["dataset"][x].data[y] + datamonth[x].data[y];
+			}
+		}
+		console.log("===========================DONE");
+	}
+
+	myData.data.labels = dataset.label;
+	myData.data.datasets = dataset.dataset;
 };
 
-setData(11);
+setData(1);
 
 var ctx = document.getElementById("canvas");
 window.myChart = new Chart(ctx, myData);
 
-// document.getElementById("addDataset").addEventListener("click", function () {
-// 	if (!chartFilter) {
-// 		var colorName = colors[colorIndex];
-// 		var newLabel = "Label " + (myData.data.datasets.length + 1);
-// 		var newDataset = {
-// 			data: [randomInt(), randomInt(), randomInt(), randomInt()],
-// 			backgroundColor: colorName,
-// 			label: newLabel,
-// 		};
-
-// 		myData.data.datasets.push(newDataset);
-
-// 		window.myChart.update();
-
-// 		if (colorIndex < 4) {
-// 			colorIndex = colorIndex + 1;
-// 		} else {
-// 			colorIndex = 0;
-// 		}
-// 	} else {
-// 		alert("Can't add data set chart when filter active");
-// 	}
-// });
-// document.getElementById("removeDataset").addEventListener("click", function () {
-// 	if (!chartFilter) {
-// 		myData.data.datasets.pop();
-// 		labelData.pop();
-// 		colorData.pop();
-// 		window.myChart.update();
-// 	} else {
-// 		alert("Can't remove data set chart when filter active");
-// 	}
-// });
 document.getElementById("addData").addEventListener("click", function () {
-	if (myData.data.datasets.length > 0) {
-		let month = filterLabel[filterIndex];
+	for (let i = 0; i < 11; i++) {
+		let month = filterLabel[i];
+		console.log(month);
 		var label = "Label " + (dataChart[month].label.length + 1);
 		dataChart[month].label.push(label);
 
-		for (var i = 0; i < myData.data.datasets.length; ++i) {
+		for (var x = 0; x < myData.data.datasets.length; ++x) {
 			let quantity = randomInt(20, 100);
-			dataChart[month].dataset[i].data.push(quantity);
+			dataChart[month].dataset[x].data.push(quantity);
 		}
-		setData(filterIndex);
-		window.myChart.update();
 	}
+	console.log(dataChart);
+	setData(filterIndex);
+	window.myChart.update();
 });
 
 document.getElementById("removeData").addEventListener("click", function () {
-	let month = filterLabel[filterIndex];
-	dataChart[month].label.splice(-1, 1);
+	for (let i = 0; i < 11; i++) {
+		let month = filterLabel[i];
+		dataChart[month].label.splice(-1, 1);
 
-	dataChart[month].dataset.forEach(function (dataset) {
-		dataset.data.pop;
-	});
+		dataChart[month].dataset.forEach(function (dataset) {
+			dataset.data.pop;
+		});
+	}
 
 	setData(filterIndex);
 	window.myChart.update();
