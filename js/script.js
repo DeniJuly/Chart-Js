@@ -6,7 +6,13 @@ var filterIndex = 0;
 var filterLabel = ["januari", "februari", "maret", "april", "mei", "juni", "juli", "agustus", "september", "oktober", "november", "desember"];
 var barOptions_stacked = {
 	tooltips: {
-		enabled: true,
+		cornerRadius: 4,
+		caretSize: 4,
+		xPadding: 16,
+		yPadding: 10,
+		backgroundColor: "rgba(0, 0, 0, 0.9)",
+		titleFontStyle: "normal",
+		titleMarginBottom: 15,
 	},
 	hover: {
 		animationDuration: 0,
@@ -106,7 +112,6 @@ window.setData = function (index) {
 				dataset["dataset"][x].data[y] = dataset["dataset"][x].data[y] + datamonth[x].data[y];
 			}
 		}
-		console.log("===========================DONE");
 	}
 
 	myData.data.labels = dataset.label;
@@ -153,9 +158,9 @@ document.getElementById("resetChart").addEventListener("click", function () {
 	window.myChart.update();
 });
 
-// window.setInterval(function () {
-// 	window.myChart.update();
-// }, 5000);
+window.setInterval(function () {
+	window.myChart.update();
+}, 5000);
 window.showSelectOption = function () {
 	let select = document.getElementById("select");
 	select.innerHTML = "";
