@@ -153,9 +153,9 @@ document.getElementById("resetChart").addEventListener("click", function () {
 	window.myChart.update();
 });
 
-window.setInterval(function () {
-	window.myChart.update();
-}, 5000);
+// window.setInterval(function () {
+// 	window.myChart.update();
+// }, 5000);
 window.showSelectOption = function () {
 	let select = document.getElementById("select");
 	select.innerHTML = "";
