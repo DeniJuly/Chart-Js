@@ -6,6 +6,7 @@ var filterIndex = 0;
 var filterLabel = ["januari", "februari", "maret", "april", "mei", "juni", "juli", "agustus", "september", "oktober", "november", "desember"];
 var barOptions_stacked = {
 	tooltips: {
+		mode: 'nearest',
 		cornerRadius: 4,
 		caretSize: 4,
 		xPadding: 16,
